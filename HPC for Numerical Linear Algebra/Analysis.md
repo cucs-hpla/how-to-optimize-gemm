@@ -24,55 +24,55 @@ and can be found in this directory.<br />
 #Question # 1 GEneral Matrix Multiply
 ###################################################################
 
-#a.) Compare the number of instructions and cache-misses for the reference implementation as 
-well as your favorite optimized implementation.
+##a.) Compare the number of instructions and cache-misses for the reference implementation as 
+##well as your favorite optimized implementation.
 
-valgrind --tool=callgrind --simulate-cache=yes program-to-run program-arguments
-callgrind annotate --auto=yes callgrind.out.pid
+valgrind --tool=callgrind --simulate-cache=yes program-to-run program-arguments<br />
+callgrind annotate --auto=yes callgrind.out.pid<br />
 
-The following counts are for the running the entire program!
+The following counts are for the running the entire program!<br />
 
-Implementation  | Ir	    | I1mr |D1mr	    | D1mw
---------------  | --        | ---- |----      | ---- 
-Reference	|     3930631791|	5480 |76690602  |	470138
-MMult1	|     3931817109|	5322 |78395436  |	470287
-MMult 1x4 3	|	3930562851|	5387 |78599691  |	484896
-MMult 1x4 9	|	2367831438|	5512 |116627158 |	639682
-MMult 4x4 10|	2089465161|	5612 |53343101  |	512180
-MMult 4x4 13|	2112209129|	5733 |39062376  |	623747
+Implementation | Ir | I1mr | D1mr | D1mw
+-------------- | -- | ---- | ---- | ---- 
+Reference | 3930631791 | 5480 | 76690602 | 470138
+MMult1 | 3931817109 | 5322 | 78395436 | 470287
+MMult 1x4 3	| 3930562851| 5387 | 78599691 | 484896
+MMult 1x4 9	 | 2367831438| 5512 | 116627158 | 639682
+MMult 4x4 10 | 2089465161| 5612 | 53343101 | 512180
+MMult 4x4 13 | 2112209129| 5733 | 39062376 | 623747
 
-Ir: I cache reads (Instructions executed)
-I1mr: I1 cache read misses (instruction wasn't in I1 cache but was in L2)
-D1mr: D1 cache read misses (data location not in D1 cache, but in L2)
-D1mw: D1 cache write misses (location not in D1 cache, but in L2)
+Ir: I cache reads (Instructions executed)<br />
+I1mr: I1 cache read misses (instruction wasn't in I1 cache but was in L2)<br />
+D1mr: D1 cache read misses (data location not in D1 cache, but in L2)<br />
+D1mw: D1 cache write misses (location not in D1 cache, but in L2)<br />
 
-In General as we optimize the number of instructions decreases as well as the cache misses.
+In General as we optimize the number of instructions decreases as well as the cache misses.<br />
 
-#b.) Write an impementation that calls the dgemm function from an optimized BLAS.  You'll need
-to edit the makefule to link -lblas.
+##b.) Write an impementation that calls the dgemm function from an optimized BLAS.  You'll need
+##to edit the makefule to link -lblas.
 
-I ended up using the openblas implementation of blas to do the general matrix matrix multiply.
+I ended up using the openblas implementation of blas to do the general matrix matrix multiply.<br />
 
-my make file has the following updates or it can be found in "makefile" in the current directory
-
-###################################################################
-OLD  := MMult0
-NEW  := MMult BLAS
-
- sample makefile
-
-
-CC         := clang
-LINKER     := $(CC)
-CFLAGS     := -O2 -Wall -msse3 
-LDFLAGS    := -lm -lblas -L/usr/local/opt/openblas/lib
+my make file has the following updates or it can be found in "makefile" in the current directory<br />
 
 ###################################################################
+OLD  := MMult0<br />
+NEW  := MMult BLAS<br />
 
-The version I used for MY MULT with the openblas implementation looks like the following
+ sample makefile<br />
+
+
+CC         := clang<br />
+LINKER     := $(CC)<br />
+CFLAGS     := -O2 -Wall -msse3 <br />
+LDFLAGS    := -lm -lblas -L/usr/local/opt/openblas/lib<br />
 
 ###################################################################
-/* Create macros so that the matrices are stored in column-major order */
+
+The version I used for MY MULT with the openblas implementation looks like the following<br />
+
+###################################################################
+/* Create macros so that the matrices are stored in column-major order */<br />
 
 define A(i,j) a[ (j)*lda + (i) ]
 define B(i,j) b[ (j)*ldb + (i) ]
@@ -92,7 +92,7 @@ dgemm (&transa,&transb,&m,&n,&k,&alpha,a,&lda,b,&ldb,&beta,c,&ldc);
 }
 ###################################################################
 
-#c.) Make a plot comparing your favorite implementation to the BLAS implementation
+##c.) Make a plot comparing your favorite implementation to the BLAS implementation
 
 The plot for this comparison can be found in this directory under the file name
 "compare MMult 4x4 13 MMult BLAS.png"
@@ -107,7 +107,7 @@ all avaible cores using openmp we can get up to 130 GFLOPS/sec!
 #Question # 2 SYmmetric Matrix Multiply
 ###################################################################
 
-#a.) Extend the test harness to perform the muliplication C += A * B where A is symmetric. 
+##a.) Extend the test harness to perform the muliplication C += A * B where A is symmetric. 
 You may assume that either the upper or lower triangular part is significant.
 
 I ended up implementing the openblas implementation of symmetric matrix multiply, which looks
@@ -147,7 +147,7 @@ instructions better, even though it may be more complicated to implement.  Even 
 it looks to be that everything has been heavily optimized so that everything within 
 openblas runs near peak performance.
 
-#b.) What is good and bad about this implementation relative to GEMM?
+##b.) What is good and bad about this implementation relative to GEMM?
 
 What is good about this sort of implementation is that we only have to store half of the matrix
 and the amount of FLOPS is cut in half.  However it is bad when trying to optimize instructions
