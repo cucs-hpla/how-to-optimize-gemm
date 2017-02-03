@@ -24,8 +24,7 @@ and can be found in this directory.<br />
 #Question # 1 GEneral Matrix Multiply
 ###################################################################
 
-##a.) Compare the number of instructions and cache-misses for the reference implementation as 
-##well as your favorite optimized implementation.
+##a.) Compare the number of instructions and cache-misses for the reference implementation as well as your favorite optimized implementation.
 
 valgrind --tool=callgrind --simulate-cache=yes program-to-run program-arguments<br />
 callgrind annotate --auto=yes callgrind.out.pid<br />
@@ -48,8 +47,7 @@ D1mw: D1 cache write misses (location not in D1 cache, but in L2)<br />
 
 In General as we optimize the number of instructions decreases as well as the cache misses.<br />
 
-##b.) Write an impementation that calls the dgemm function from an optimized BLAS.  You'll need
-##to edit the makefule to link -lblas.
+##b.) Write an impementation that calls the dgemm function from an optimized BLAS.  You'll need to edit the makefule to link -lblas.
 
 I ended up using the openblas implementation of blas to do the general matrix matrix multiply.<br />
 
@@ -99,6 +97,8 @@ The plot for this comparison can be found in this directory under the file name
 
 The blas implementation is running at nearly 40 GFLOPS/sec which is nearly the peak speed of 
 the processor, where as the 4x4 13 optimization implementation is running at about 12 GFLOPS/sec
+
+![Comparison of GEMM Optimizations](compare_MMult_4x4_13_MMult_BLAS.png)
 
 Its quite amazing how fast the BLAS implementation is!  If we run the BLAS implemenation with
 all avaible cores using openmp we can get up to 130 GFLOPS/sec!
