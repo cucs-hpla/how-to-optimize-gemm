@@ -1,27 +1,27 @@
 ###################################################################
-Analysis.md__
-Eric Peters__
-cucs-hpla__
-HW1:Due 2017-02-06__
+Analysis.md<br />
+Eric Peters<br />
+cucs-hpla<br />
+HW1:Due 2017-02-06<br />
 ###################################################################
 
-For this assignment I am running everything on a Mac, and was not able to use the Linux perf__
-tool.  Instead I used the callgrind tool by valgrind.  This isn't quite the same thing__
-as perf because it simulates the memory usage and therefore performs quite a bit slower.  In__ 
-order to combat the speed deficit I only ran up to the 400 matricies instead of the 800 when__ 
-recording instructions and cache misses.  I felt it was sufficient to still see the trends__
-that were present.
+For this assignment I am running everything on a Mac, and was not able to use the Linux perf<br />
+tool.  Instead I used the callgrind tool by valgrind.  This isn't quite the same thing<br />
+as perf because it simulates the memory usage and therefore performs quite a bit slower.  In<br /> 
+order to combat the speed deficit I only ran up to the 400 matricies instead of the 800 when<br /> 
+recording instructions and cache misses.  I felt it was sufficient to still see the trends<br />
+that were present.<br />
 
-I started by forking the repository.(Might have done something a little incorrect here...)__
+I started by forking the repository.(Might have done something a little incorrect here...)<br />
 
-proc parameters.m was altered to reflect my machine parameters, where I am running a 2.2 GHz__
-Intel Core i7 processor.__
+proc parameters.m was altered to reflect my machine parameters, where I am running a 2.2 GHz<br />
+Intel Core i7 processor.<br />
 
-The makefile was used to run different implementations of the general matrix matrix multiply__ 
-and can be found in this directory.__
+The makefile was used to run different implementations of the general matrix matrix multiply<br /> 
+and can be found in this directory.<br />
 
 ###################################################################
-Question # 1 GEneral Matrix Multiply
+#Question # 1 GEneral Matrix Multiply
 ###################################################################
 
 #a.) Compare the number of instructions and cache-misses for the reference implementation as 
@@ -58,9 +58,9 @@ my make file has the following updates or it can be found in "makefile" in the c
 ###################################################################
 OLD  := MMult0
 NEW  := MMult BLAS
-#
-# sample makefile
-#
+
+ sample makefile
+
 
 CC         := clang
 LINKER     := $(CC)
@@ -74,9 +74,9 @@ The version I used for MY MULT with the openblas implementation looks like the f
 ###################################################################
 /* Create macros so that the matrices are stored in column-major order */
 
-#define A(i,j) a[ (j)*lda + (i) ]
-#define B(i,j) b[ (j)*ldb + (i) ]
-#define C(i,j) c[ (j)*ldc + (i) ]
+define A(i,j) a[ (j)*lda + (i) ]
+define B(i,j) b[ (j)*ldb + (i) ]
+define C(i,j) c[ (j)*ldc + (i) ]
 
 /* Routine for computing C = A * B + C */
 
@@ -104,7 +104,7 @@ Its quite amazing how fast the BLAS implementation is!  If we run the BLAS imple
 all avaible cores using openmp we can get up to 130 GFLOPS/sec!
 
 ###################################################################
-Question # 2 SYmmetric Matrix Multiply
+#Question # 2 SYmmetric Matrix Multiply
 ###################################################################
 
 #a.) Extend the test harness to perform the muliplication C += A * B where A is symmetric. 
@@ -116,9 +116,9 @@ like the following. "MMult BLAS SYMM.c" in this directory.
 ###################################################################
 /* Create macros so that the matrices are stored in column-major order */
 
-#define A(i,j) a[ (j)*lda + (i) ]
-#define B(i,j) b[ (j)*ldb + (i) ]
-#define C(i,j) c[ (j)*ldc + (i) ]
+define A(i,j) a[ (j)*lda + (i) ]
+define B(i,j) b[ (j)*ldb + (i) ]
+define C(i,j) c[ (j)*ldc + (i) ]
 
 /* Routine for computing C = A * B + C */
 extern void dsymm_(char*, char*, int*, int*, double*, double*, int*, double*, int*, double*, double*, int*);
