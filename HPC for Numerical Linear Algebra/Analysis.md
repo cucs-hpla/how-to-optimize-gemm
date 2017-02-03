@@ -55,16 +55,50 @@ my make file has the following updates or it can be found in "makefile" in the c
 ###################################################################
 ```c
 OLD  := MMult0
-NEW  := MMult BLAS
-
-#sample makefile
-
+NEW  := MMult_BLAS
+#
+# sample makefile
+#
 
 CC         := clang
 LINKER     := $(CC)
 CFLAGS     := -O2 -Wall -msse3 
 LDFLAGS    := -lm -lblas -L/usr/local/opt/openblas/lib
-```
+
+UTIL       := copy_matrix.o \
+              compare_matrices.o \
+              random_matrix.o \
+              dclock.o \
+              REF_MMult.o \
+              print_matrix.o
+
+TEST_OBJS  := test_MMult.o $(NEW).o 
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+all: 
+	make clean;
+	make test_MMult.x
+
+test_MMult.x: $(TEST_OBJS) $(UTIL) parameters.h
+	$(LINKER) $(TEST_OBJS) $(UTIL) $(LDFLAGS) \
+	$(BLAS_LIB) -o $(TEST_BIN) $@ 
+
+run:	
+	make all
+	echo "version = '$(NEW)';" > output_$(NEW).m
+	OMP_NUM_THREADS=4 ./test_MMult.x | tee -a output_$(NEW).m
+	cp output_$(OLD).m output_old.m
+	cp output_$(NEW).m output_new.m
+
+clean:
+	rm -f *.o *~ core *.x
+
+cleanall:
+	rm -f *.o *~ core *.x output*.m *.eps *.png```
 ###################################################################
 
 The version I used for MY MULT with the openblas implementation looks like the following<br />
@@ -77,7 +111,7 @@ The version I used for MY MULT with the openblas implementation looks like the f
 #define B(i,j) b[ (j)*ldb + (i) ]
 #define C(i,j) c[ (j)*ldc + (i) ]
 
-Routine for computing C = A * B + C */
+/*Routine for computing C = A * B + C */
 
 extern void dgemm (char*, char*, int*, int*,int*, double*, double*, int*, double*, int*, double*, double*, int*);
 
