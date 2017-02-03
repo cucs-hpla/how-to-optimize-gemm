@@ -1,24 +1,24 @@
 ###################################################################
-Analysis.md
-Eric Peters
-cucs-hpla
-HW1:Due 2017-02-06
+Analysis.md__
+Eric Peters__
+cucs-hpla__
+HW1:Due 2017-02-06__
 ###################################################################
 
-For this assignment I am running everything on a Mac, and was not able to use the Linux perf
-tool.  Instead I used the callgrind tool by valgrind.  This isn't quite the same thing
-as perf because it simulates the memory usage and therefore performs quite a bit slower.  In 
-order to combat the speed deficit I only ran up to the 400 matricies instead of the 800 when 
-recording instructions and cache misses.  I felt it was sufficient to still see the trends
+For this assignment I am running everything on a Mac, and was not able to use the Linux perf__
+tool.  Instead I used the callgrind tool by valgrind.  This isn't quite the same thing__
+as perf because it simulates the memory usage and therefore performs quite a bit slower.  In__ 
+order to combat the speed deficit I only ran up to the 400 matricies instead of the 800 when__ 
+recording instructions and cache misses.  I felt it was sufficient to still see the trends__
 that were present.
 
-I started by forking the repository.(Might have done something a little incorrect here...)
+I started by forking the repository.(Might have done something a little incorrect here...)__
 
-proc parameters.m was altered to reflect my machine parameters, where I am running a 2.2 GHz
-Intel Core i7 processor.
+proc parameters.m was altered to reflect my machine parameters, where I am running a 2.2 GHz__
+Intel Core i7 processor.__
 
-The makefile was used to run different implementations of the general matrix matrix multiply 
-and can be found in this directory.
+The makefile was used to run different implementations of the general matrix matrix multiply__ 
+and can be found in this directory.__
 
 ###################################################################
 Question # 1 GEneral Matrix Multiply
@@ -32,13 +32,14 @@ callgrind annotate --auto=yes callgrind.out.pid
 
 The following counts are for the running the entire program!
 
-Implementation	Ir		I1mr	D1mr		D1mw
-Reference	      3930631791	5480	76690602	470138
-MMult1		3931817109	5322	78395436	470287
-MMult 1x4 3		3930562851	5387	78599691	484896
-MMult 1x4 9		2367831438	5512	116627158	639682
-MMult 4x4 10	2089465161	5612	53343101	512180
-MMult 4x4 13	2112209129	5733	39062376	623747
+Implementation  | Ir	    | I1mr |D1mr	    | D1mw
+--------------  | --        | ---- |----      | ---- 
+Reference	|     3930631791|	5480 |76690602  |	470138
+MMult1	|     3931817109|	5322 |78395436  |	470287
+MMult 1x4 3	|	3930562851|	5387 |78599691  |	484896
+MMult 1x4 9	|	2367831438|	5512 |116627158 |	639682
+MMult 4x4 10|	2089465161|	5612 |53343101  |	512180
+MMult 4x4 13|	2112209129|	5733 |39062376  |	623747
 
 Ir: I cache reads (Instructions executed)
 I1mr: I1 cache read misses (instruction wasn't in I1 cache but was in L2)
