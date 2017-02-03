@@ -98,7 +98,8 @@ clean:
 	rm -f *.o *~ core *.x
 
 cleanall:
-	rm -f *.o *~ core *.x output*.m *.eps *.png```
+	rm -f *.o *~ core *.x output*.m *.eps *.png
+```
 ###################################################################
 
 The version I used for MY MULT with the openblas implementation looks like the following<br />
