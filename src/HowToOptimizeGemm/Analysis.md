@@ -22,7 +22,8 @@ Optimized Version (MMult_4x4_10)
 Cache misses/cache reference: 80% of cache references in optimized lead to cache miss, for reference, 92%.  This difference is significant because this version does not reduce the number of instructions much more than the psuedo-optimized version but the cache misses are significantly reduced as a percentage of cache misses.  
 
 
-BLAS Function Dgemm: dgemm significantly reduces the amount of instructions (to fewer than 40%- can't tell exactly because each built in function uses a very small percentage of total instruction base) and the cache misses to less than 10%, leaving about 90% of the instructions being done in the reference version.  The cache references account for about 20% of the cache references.  Using BLAS optimises GEMM not only by reducing the number of instructions needed but also by significantly improving the use of cache.
+BLAS Function Dgemm (run against MMult_4x4_10): dgemm significantly reduces the amount of instructions (to fewer than 40%- can't tell exactly because each built in function uses a very small percentage of total instruction base) and the cache misses to less than 10%, leaving about 90% of the instructions being done in the reference version.  The cache references account for about 20% of the cache references.  Using BLAS optimises GEMM not only by reducing the number of instructions needed but also by significantly improving the use of cache.
+PLOT FOUND IN IMAGES FILE AND LABELLED compare_MMult_4x4_MMult_dgemm.png
 
 
 SYMMETRIC MATRIX MULTIPLICATION:
