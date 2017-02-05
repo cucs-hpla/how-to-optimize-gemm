@@ -1,17 +1,18 @@
 OLD  := MMult0
-NEW  := MMult0
+NEW  := MMult_4x4_10
 #
 # sample makefile
 #
 
 CC         := gcc
 LINKER     := $(CC)
-CFLAGS     := -O2 -Wall -msse3
-LDFLAGS    := -lm
+CFLAGS     := -O3 -Wall -march=native -g -lgslcblas
+LDFLAGS    := -lm -lblas
 
 UTIL       := copy_matrix.o \
               compare_matrices.o \
               random_matrix.o \
+              sym_matrix.o \
               dclock.o \
               REF_MMult.o \
               print_matrix.o
