@@ -1,6 +1,6 @@
 The results contained in this file concern the solution of `C += A * B` for matrices `A`, `B`, and `C`.
 First, we compare the number of instructions as well as the number of cache misses for the reference solution and the optimized version MMult_4x4_16.
-The former is an unoptimized solution, while the latter incorporates a combination of loop unrolling and contiguous blocked computations to more effectively utilize vector instructions and maximize cache use.
+The former is an unoptimized solution, while the latter incorporates a combination of loop unrolling and contiguous blocked computations to more effectively utilize vector instructions and maximize cache use. We use the `perf` tool to gather the needed information (`make && perf stat -e instructions,cache-misses ./test_MMult.x`):
 
 Number of instructions:
 
