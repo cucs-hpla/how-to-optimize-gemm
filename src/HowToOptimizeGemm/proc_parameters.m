@@ -1,8 +1,9 @@
 % Indicate the number of floating point operations that can be executed
 % per clock cycle
-%
+% Intel Broadwell:
+% 16 DP FLOPs/cycle: two 4-wide FMA instructions32 SP FLOPs/cycle: two 8-wide FMA instructions
 
-nflops_per_cycle = 4;
+nflops_per_cycle = 32; 
 
 %
 % Indicate the number of processors being used (in case you are using a
@@ -19,4 +20,5 @@ nprocessors = 1;
 % the peak clock rate...
 %
 
-GHz_of_processor = 2.6;
+GHz_of_processor = 2.7;
+%with turbo boost
