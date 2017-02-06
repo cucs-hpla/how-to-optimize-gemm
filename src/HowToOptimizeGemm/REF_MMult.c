@@ -12,13 +12,27 @@ void REF_MMult( int m, int n, int k, double *a, int lda,
 {
   int i, j, p;
 
-  for ( i=0; i<m; i++ ){
+    // take advantage of symmetric A
+    for ( i=0; i<m; i++ ) {
+        for ( j=0; j<n; j++ ) {
+            for ( p=0; p<i; p++ ) {
+                C( i,j ) = C( i,j ) + A( p,i ) * B( p,j );
+            }
+            for ( ; p<k; p++ ) {
+                C( i,j ) = C( i,j ) + A( i,p ) * B( p,j );
+            }
+        }
+    }
+    
+  // non-symmetric case
+  /*for ( i=0; i<m; i++ ){
     for ( j=0; j<n; j++ ){
       for ( p=0; p<k; p++ ){
-	C( i,j ) = C( i,j ) +  A( i,p ) * B( p,j );
+	    C( i,j ) = C( i,j ) + A( i,p ) * B( p,j );
       }
     }
-  }
+  }*/
+  
 }
 
 
