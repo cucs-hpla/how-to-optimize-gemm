@@ -2,6 +2,9 @@
 // #include <malloc.h>
 #include <stdlib.h>
 
+#include <cblas.h>
+
+
 #include "parameters.h"
 
 void REF_MMult(int, int, int, double *, int, double *, int, double *, int );
@@ -68,6 +71,7 @@ int main()
       /* Time your implementation */
       dtime = dclock();
 
+	  //cblas_dgemm(CblasColMajor, CblasNoTrans, CblasTrans,lda,ldb,ldc,1,a, lda, b, ldb,1,c,ldc);
       MY_MMult( m, n, k, a, lda, b, ldb, c, ldc );
       
       dtime = dclock() - dtime;
@@ -80,7 +84,7 @@ int main()
 
     diff = compare_matrices( m, n, c, ldc, cref, ldc );
 
-    printf( "%d %le %le \n", p, gflops / dtime_best, diff );
+    printf( "%d %le %le ;\n", p, gflops / dtime_best, diff );
     fflush( stdout );
 
     free( a );

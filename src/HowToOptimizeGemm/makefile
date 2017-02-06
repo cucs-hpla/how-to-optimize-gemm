@@ -1,13 +1,18 @@
-OLD  := MMult0
-NEW  := MMult0
+OLD  := MMult_4x4_4
+NEW  := MMult_4x4_4
 #
 # sample makefile
 #
 
+#
+# Flags:
+# -I /home/user/Desktop/CBLAS/include/ -L/home/user/Desktop/CBLAS/lib -lopenblas
+#
+
 CC         := gcc
 LINKER     := $(CC)
-CFLAGS     := -O2 -Wall -msse3
-LDFLAGS    := -lm
+CFLAGS     := -O2 -Wall -msse3 -g
+LDFLAGS    := -I /home/user/Desktop/CBLAS/include/ -L/home/user/Desktop/CBLAS/lib -lopenblas
 
 UTIL       := copy_matrix.o \
               compare_matrices.o \
@@ -19,9 +24,9 @@ UTIL       := copy_matrix.o \
 TEST_OBJS  := test_MMult.o $(NEW).o 
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ $(LDFLAGS)
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ $(LDFLAGS)
 
 all: 
 	make clean;
