@@ -1,5 +1,6 @@
 # HPLA Homework 1
 Adam Heaton
+
 Feb-5-2017
 
 # Machine Parameters
