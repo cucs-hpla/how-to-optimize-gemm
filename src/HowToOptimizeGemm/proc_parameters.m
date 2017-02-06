@@ -9,7 +9,7 @@ nflops_per_cycle = 4;
 % multicore or SMP)
 %
 
-nprocessors = 1;
+nprocessors = 4;
 
 %
 % Indicate the clock speed of the processor.  On a Linux machine this info
@@ -19,4 +19,4 @@ nprocessors = 1;
 % the peak clock rate...
 %
 
-GHz_of_processor = 2.6;
+GHz_of_processor = 2.0;
