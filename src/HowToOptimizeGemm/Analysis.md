@@ -1,6 +1,6 @@
 The results contained in this file concern the solution of `C += A * B` for matrices `A`, `B`, and `C`.
 First, we compare the number of instructions as well as the number of cache misses for the reference solution and the optimized version MMult_4x4_16.
-The former is an unoptimized solution, while the latter incorporates a combination of loop unrolling and contiguous blocked computations to more effectively utilize vector instructions and maximizing cache use.
+The former is an unoptimized solution, while the latter incorporates a combination of loop unrolling and contiguous blocked computations to more effectively utilize vector instructions and maximize cache use.
 
 Number of instructions:
 
@@ -25,4 +25,4 @@ Now we look at the case where `A` is symmetric, so we modify the random matrix f
 
 ![Figure 2](https://github.com/seblaud/how-to-optimize-gemm/blob/master/src/HowToOptimizeGemm/compare_MMult_dgemm_MMult_dsymm.png "**dgemm** vs. **dsymm**")
 
-As the figure suggests, the performance of **dgemm** and **dsymm** is quite comparable. The good thing about symmetric matrices is that we need to store less information to encode the entire matrix, but the bad thing is that (in general) the performance of computing `C += A * B` for dense symmetric matrices is no better than for dense non-symmetric matrices (when using optimized BLAS routines).
+As the figure suggests, the performance of **dgemm** and **dsymm** is quite comparable. The good thing about symmetric matrices is that we need to store less information to encode the entire matrix, but the bad thing is that (in general) the performance of computing `C += A * B` for dense symmetric matrices is no better than for dense non-symmetric matrices (when using optimized BLAS routines). We also do still see the similar dips in performance for **dsymm** (when `m = n = k = 400` or `500`), but they seem to be less severe and less frequent than for **dgemm**.
