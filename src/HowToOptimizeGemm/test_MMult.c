@@ -14,22 +14,23 @@ double dclock();
 
 int main()
 {
-  int 
-    p, 
+  int
+    p,
+    i, j,
     m, n, k,
-    lda, ldb, ldc, 
+    lda, ldb, ldc,
     rep;
 
   double
-    dtime, dtime_best,        
-    gflops, 
+    dtime, dtime_best,
+    gflops,
     diff;
 
-  double 
-    *a, *b, *c, *cref, *cold;    
-  
+  double
+    *a, *b, *c, *cref, *cold;
+
   printf( "MY_MMult = [\n" );
-    
+
   for ( p=PFIRST; p<=PLAST; p+=PINC ){
     m = ( M == -1 ? p : M );
     n = ( N == -1 ? p : N );
@@ -44,7 +45,7 @@ int main()
     /* Allocate space for the matrices */
     /* Note: I create an extra column in A to make sure that
        prefetching beyond the matrix does not cause a segfault */
-    a = ( double * ) malloc( lda * (k+1) * sizeof( double ) );  
+    a = ( double * ) malloc( lda * (k+1) * sizeof( double ) );
     b = ( double * ) malloc( ldb * n * sizeof( double ) );
     c = ( double * ) malloc( ldc * n * sizeof( double ) );
     cold = ( double * ) malloc( ldc * n * sizeof( double ) );
@@ -52,6 +53,13 @@ int main()
 
     /* Generate random matrices A, B, Cold */
     random_matrix( m, k, a, lda );
+
+    /* Make A symmetric */
+#define A( i,j ) a[ (j)*lda + (i) ]
+    for ( j=0; j<n; j++ )
+      for ( i=j+1; i<m; i++ )
+        A( i,j ) = A(j,i);
+
     random_matrix( k, n, b, ldb );
     random_matrix( m, n, cold, ldc );
 
@@ -69,7 +77,7 @@ int main()
       dtime = dclock();
 
       MY_MMult( m, n, k, a, lda, b, ldb, c, ldc );
-      
+
       dtime = dclock() - dtime;
 
       if ( rep==0 )
