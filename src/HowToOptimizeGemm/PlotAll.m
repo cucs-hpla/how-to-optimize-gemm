@@ -49,3 +49,6 @@ title( title_string );
 filename = sprintf( "compare_%s_%s", version_old, version_new );
 
 print( filename, '-dpng' );
+
+%filename_fig = strcat(filename,'.fig');
+%saveas(gcf,filename_fig);

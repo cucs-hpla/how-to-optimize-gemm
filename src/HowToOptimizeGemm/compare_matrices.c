@@ -1,3 +1,4 @@
+
 #define A( i, j ) a[ (j)*lda + (i) ]
 #define B( i, j ) b[ (j)*ldb + (i) ]
 #define abs( x ) ( (x) < 0.0 ? -(x) : (x) )
@@ -15,4 +16,3 @@ double compare_matrices( int m, int n, double *a, int lda, double *b, int ldb )
 
   return max_diff;
 }
-

@@ -1,0 +1,23 @@
+/* Create macros so that the matrices are stored in column-major order */
+#include <stdio.h>                                                                         
+#include <stdlib.h>
+//#include </System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/Headers/cblas.h>
+#include</usr/local/opt/openblas/include/cblas.h>
+
+/* Routine for computing C = A * B + C ,
+using cblas dgemm function
+*/
+ 
+void MY_MMult( int m, int n, int k, double *a, int lda, 
+                                    double *b, int ldb,
+                                    double *c, int ldc )
+{
+  const double alpha = 1.0 ;
+  const double beta = 1.0;
+  
+  cblas_dgemm( CblasColMajor, CblasNoTrans, CblasNoTrans, m, n, k, alpha , a, lda, b, ldb, beta, c, ldc);
+
+}
+
+
+  
