@@ -1,13 +1,13 @@
 OLD  := MMult0
-NEW  := MMult0
+NEW  := MMult0_sym
 #
 # sample makefile
 #
 
-CC         := gcc
+CC         := gcc -lblas
 LINKER     := $(CC)
 CFLAGS     := -O2 -Wall -msse3
-LDFLAGS    := -lm
+LDFLAGS    := -lm -lblas
 
 UTIL       := copy_matrix.o \
               compare_matrices.o \
